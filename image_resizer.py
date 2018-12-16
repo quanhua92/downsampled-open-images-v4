@@ -30,22 +30,24 @@ def parse_arguments():
                                                   "in the same time ",
                         default=2, type=int)
     parser.add_argument('-l', '--log', help="Path of the output log", default="output.log")
+    parser.add_argument('-v', '--verbose', help="Number of images between each verbose in each thread",
+                        default=1000, type=int)
 
 
     args = parser.parse_args()
 
     return args.in_dir, args.out_dir, args.algorithm, args.size, args.extension, args.processes, \
-           args.log
+           args.log, args.verbose
 
 @logger.catch
-def resize_images(idx, filenames, in_dir, out_dir, algo, size, extension, log_path):
+def resize_images(idx, filenames, in_dir, out_dir, algo, size, extension, log_path, verbose):
     logger.add(log_path, enqueue=True)
 
     logger.info("Thread {} starts!", idx)
 
     count_error = 0
     for file_idx, filename in enumerate(filenames):    
-        if file_idx % 10000 == 0:
+        if file_idx % verbose == 0:
             logger.info("Thread {} processed {}/{}", idx, file_idx, len(filenames))
 
         in_path = os.path.join(in_dir, filename)
@@ -86,13 +88,13 @@ def resize_images(idx, filenames, in_dir, out_dir, algo, size, extension, log_pa
 
 @logger.catch
 def main():
-    in_dir, out_dir, algorithm, size, extension, processes, log_path = parse_arguments()
+    in_dir, out_dir, algorithm, size, extension, processes, log_path, verbose = parse_arguments()
 
     logger.add(log_path, enqueue=True)
 
     logger.info("Begin!")
-    logger.info("in_dir: {}, out_dir: {}, algorithm: {}, size: {}, extension: {}, processes: {}, log_path: {}",
-                    in_dir, out_dir, algorithm, size, extension, processes, log_path)
+    logger.info("in_dir: {}, out_dir: {}, algorithm: {}, size: {}, extension: {}, processes: {}, log_path: {}, verbose: {}", 
+                    in_dir, out_dir, algorithm, size, extension, processes, log_path, verbose)
 
     pool = Pool(processes=processes)
 
@@ -117,7 +119,7 @@ def main():
     for idx, chunk in enumerate(chunks):
         logger.info("Send chunk of size {} to thread {}", len(chunk), idx)
         pool.apply_async(func=resize_images,
-                        args=[idx, chunk, in_dir, out_dir, alg_dict[algorithm], size, extension, log_path])
+                        args=[idx, chunk, in_dir, out_dir, alg_dict[algorithm], size, extension, log_path, verbose])
 
     pool.close()
     pool.join()

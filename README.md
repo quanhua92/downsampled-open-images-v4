@@ -37,6 +37,8 @@ optional arguments:
                         Number of sub-processes that run different folders in
                         the same time
   -l LOG, --log LOG     Path of the output log
+  -v VERBOSE, --verbose VERBOSE
+                        Number of images between each verbose in each thread
 ```
 
 For example, the 512px dataset is created with the following command:
