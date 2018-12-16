@@ -44,7 +44,10 @@ def resize_images(idx, filenames, in_dir, out_dir, algo, size, extension, log_pa
     logger.info("Thread {} starts!", idx)
 
     count_error = 0
-    for filename in filenames:
+    for file_idx, filename in enumerate(filenames):    
+        if file_idx % 10000 == 0:
+            logger.info("Thread {} processed {}/{}", idx, file_idx, len(filenames))
+
         in_path = os.path.join(in_dir, filename)
         if len(extension) > 0:
             name, _ = os.path.splitext(filename)
