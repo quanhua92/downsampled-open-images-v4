@@ -1,6 +1,8 @@
 # Temp files
 output.log
 tmp
+data
+output
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
