@@ -106,13 +106,15 @@ def main():
     remaining = len(list_paths) - n * processes
 
     chunks = [list_paths[i : i + n] for i in range(0, len(list_paths) - remaining, n)]
-    chunks[-1] += list_paths[-remaining:]
+    
+    if remaining > 0:
+        chunks[-1] += list_paths[-remaining:]
 
     # Send each list to threads
     for idx, chunk in enumerate(chunks):
         logger.info("Send chunk of size {} to thread {}", len(chunk), idx)
-        pool.apply_async(func=resize_images,
-                        args=[idx, chunk, in_dir, out_dir, alg_dict[algorithm], size, extension, log_path])
+        # pool.apply_async(func=resize_images,
+        #                 args=[idx, chunk, in_dir, out_dir, alg_dict[algorithm], size, extension, log_path])
 
     pool.close()
     pool.join()

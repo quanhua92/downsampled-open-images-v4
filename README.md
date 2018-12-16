@@ -42,7 +42,7 @@ optional arguments:
 For example, the 512px dataset is created with the following command:
 
 ```
-python image_resizer.py -i data\train -o output\train -j 4 -ext jpg -a lanczos
+python image_resizer.py -i data\train -o output\train -j 4 -ext jpg -a lanczos -s 512
 ```
 
 
