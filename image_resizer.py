@@ -113,8 +113,8 @@ def main():
     # Send each list to threads
     for idx, chunk in enumerate(chunks):
         logger.info("Send chunk of size {} to thread {}", len(chunk), idx)
-        # pool.apply_async(func=resize_images,
-        #                 args=[idx, chunk, in_dir, out_dir, alg_dict[algorithm], size, extension, log_path])
+        pool.apply_async(func=resize_images,
+                        args=[idx, chunk, in_dir, out_dir, alg_dict[algorithm], size, extension, log_path])
 
     pool.close()
     pool.join()
