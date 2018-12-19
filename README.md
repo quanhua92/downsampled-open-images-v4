@@ -5,10 +5,15 @@ Downsampled Open Images Dataset V4
 The [Open Images V4 dataset](https://ai.googleblog.com/2018/04/announcing-open-images-v4-and-eccv-2018.html) contains 15.4M bounding-boxes for 600 categories on 1.9M images and 30.1M human-verified image-level labels for 19794 categories. 
 The dataset is available at this [link](https://storage.googleapis.com/openimages/web/download.html). This total size of the full dataset is `18TB`. There's also a smaller version which contains rescaled images to have at most 1024 pixels on the longest side. However, the total size of the rescaled dataset is still large (`513GB` for training, `12GB` for validation and `36GB` for testing).
 
-I provide a much smaller version of the Open Images Dataset V4, as inspired by `Downsampled ImageNet datasets` [@PatrykChrabaszcz](https://github.com/PatrykChrabaszcz/Imagenet32_Scripts). These downsampled dataset are much smaller in size so everyone can download it with ease. Experiments on these downsampled dataset are also much faster than the original.
+I provide a much smaller version of the Open Images Dataset V4, as inspired by `Downsampled ImageNet datasets` [@PatrykChrabaszcz](https://github.com/PatrykChrabaszcz/Imagenet32_Scripts). These downsampled dataset are much smaller in size so everyone can download it with ease (`59GB` for training with 512px version and `16GB` for training with 256px version). Experiments on these downsampled dataset are also much faster than the original.
 
 ## Data
-- Open Images V4 - 512 px version.
+
+| Dataset  | Train Size | Validation Size | Test Size | Test Challenge Size | Google Drive | AcademicTorrents |
+|----------|------------|-----------------|-----------|---------------------|--------------|------------------|
+| Original | 513 GB     | 12 GB           | 36 GB     | 9.7 GB              |      |                  |
+| 512px    | 52.8 GB    | 1.23 GB         | 3.72 GB   | 3.08 GB             | [Link](https://drive.google.com/drive/folders/1kXv2AMu-t0AmJ6o_b5XpLbQ_L1RxDF55)     | [Link](http://academictorrents.com/details/9208d33aceb2ca3eb2beb70a192600c9c41efba1)      |
+| 256px    | 16 GB      | 0.4 GB          | 1.14 GB   | 0.95 GB             | [Link](https://drive.google.com/drive/folders/1fUN7ygrJX9ovZB7RsBUMofluzQyLq522)     | [Link](http://academictorrents.com/details/9208d33aceb2ca3eb2beb70a192600c9c41efba1)      |
 
 ## Requirements
 - pillow
